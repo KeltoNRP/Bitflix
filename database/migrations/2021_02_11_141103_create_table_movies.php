@@ -10,11 +10,11 @@ class CreateTableMovies extends Migration
     {
         Schema::create('movies', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('title');
             $table->text('description');
             $table->string('category');
             $table->string('actors');
-            $table->float('rating');
+            $table->float('rating')->nullable();
             $table->timestamps();
         });
     }
