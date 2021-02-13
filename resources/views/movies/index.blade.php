@@ -14,12 +14,12 @@
             @if (session('message'))
                 {{session('message')}}
             @endif
-            <H1>Catálogo de filmes online</H1>
+            <H1><strong>Catálogo de filmes online</strong></H1>
             <form action="{{ route('movies.search') }}" method="post"> 
                 @csrf
                 <input type="text" name="search" placeholder="Filtrar">
-                <button type="submit" class="ml-6 text-lg leading-7 font-semibold">Filtrar</button>
-            </form> 
+                <button type="submit" class="ml-6 text-lg leading-7 font-semibold shadow">Filtrar</button>
+            </form>
             @foreach ($movies as $movie)
                 <li><a href="{{ route('movies.show', $movie->id) }}"><strong>{{ $movie->title}}</strong></a></li>
             @endforeach                           
@@ -32,7 +32,7 @@
             <div class="flex items-center">
                 <div class="flex items-center">                                   
                     <form action="{{ route('movies.create') }}" method="get"> 
-                        <button type="submit" class="ml-6 text-lg leading-7 font-semibold">Cadastrar novo filme</buttom>
+                        <button type="submit" class="ml-6 text-lg leading-7 font-black shadow">Cadastrar novo filme</buttom>
                     </form>  
                 </div>
             </div>

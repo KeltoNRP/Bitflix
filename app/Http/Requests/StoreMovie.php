@@ -21,7 +21,7 @@ class StoreMovie extends FormRequest
                 'required', 
                 'min:2', 
                 'max:160', 
-                Rule::unique('movies')=>ignore($id)
+                Rule::unique('movies')->ignore($id)
             ],
             'description' => [
                 'required', 

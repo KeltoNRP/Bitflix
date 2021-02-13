@@ -13,4 +13,4 @@
 <p>                            
 <strong>Descrição: </strong><p><textarea name="description" id="description" cols="100" rows="4" placeholder="Descrição">{{ $movie->description ?? old('description') }}</textarea>
 
-<button type="submit" class="ml-6 text-lg leading-7 font-semibold">Enviar</button>
+<button type="submit" class="ml-6 text-lg leading-7 font-semibold shadow">Enviar</button>

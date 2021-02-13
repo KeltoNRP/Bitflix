@@ -12,8 +12,9 @@ Route::get('/filmes/editar/{id}', [MovieController::class, 'edit'])->name('movie
 Route::delete('/filmes/{id}', [MovieController::class, 'destroy'])->name('movies.destroy');
 Route::get('/filmes/{id}', [MovieController::class, 'show'])->name('movies.show');
 Route::post('/filmes', [MovieController::class, 'store'])->name('movies.store');
-Route::get('/filmes', [MovieController::class, 'index'])->name('movies.index');
+Route::get('/', [MovieController::class, 'index'])->name('movies.index');
 
+/*
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
@@ -21,5 +22,6 @@ Route::get('/dashboard', function () {
 Route::get('/', function (){
     return view('welcome');
 });
+*/
 
 require __DIR__.'/auth.php';
