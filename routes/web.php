@@ -14,6 +14,12 @@ Route::get('/filmes/{id}', [MovieController::class, 'show'])->name('movies.show'
 Route::post('/filmes', [MovieController::class, 'store'])->name('movies.store');
 Route::get('/filmes', [MovieController::class, 'index'])->name('movies.index');
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
 Route::get('/', function (){
     return view('welcome');
 });
+
+require __DIR__.'/auth.php';
