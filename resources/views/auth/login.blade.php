@@ -2,7 +2,8 @@
     <x-auth-card>
         <x-slot name="logo">
             <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+                <!--<x-application-logo class="w-20 h-20 fill-current text-gray-500" />-->
+                <img src="https://media-assets-03.thedrum.com/cache/images/thedrum-user-assets-prod/s3-images-original-BLiX_logo_montserrat_selects_FINAL_281583242969--5x1--1920.png" alt="Blix" style="width:100px">
             </a>
         </x-slot>
 
