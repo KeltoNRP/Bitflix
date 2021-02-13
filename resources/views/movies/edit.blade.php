@@ -20,55 +20,38 @@
             }
         </style>
     </head>
-    
     <body class="antialiased">  
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">
-            <div class="max-w-6xl mx-auto sm:px-5 lg:px-8"> 
-                @if (isset($filters))
+            <div class="max-w-6xl mx-auto sm:px-6 lg:px-8"> 
                 <div class="sm:text-right">
                     <form action="{{ route('movies.index') }}" method="get"> 
                         <button type="submit" class="ml-6 text-lg leading-7 font-semibold">X</buttom>
                     </form>   
-                </div>                  
-                @endif              
-                <div class="mt-8 bg-white dark:bg-white-800 overflow-hidden shadow sm:rounded-lg">
-                    <div class="grid grid-cols-1 md:grid-cols-2">      
-                        <div class="p-6">  
-                                   
-                            @if (session('message'))
-                                {{session('message')}}
-                            @endif
-                            <H1>Catálogo de filmes online</H1>
-                            <form action="{{ route('movies.search') }}" method="post"> 
-                                @csrf
-                                <input type="text" name="search" placeholder="Filtrar">
-                                <button type="submit" class="ml-6 text-lg leading-7 font-semibold">Filtrar</button>
-                            </form> 
-                            @foreach ($movies as $movie)
-                                <li><a href="{{ route('movies.show', $movie->id) }}"><strong>{{ $movie->title}}</strong></a></li>
-                            @endforeach                           
-                        </div>
-                    </div>
+                </div>                 
+                <div class="mt-8 bg-white dark:bg-white-800 overflow-hidden shadow sm:rounded-lg">    
+                    <div class="p-6">          
+                        <h1>Editar o filme: <strong>{{ $movie->title}}</strong></h1>
+                        @if ($errors->any())
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        @endif
+                        <form action="{{ route('movies.update', $movie->id) }}" method="post">
+                            @csrf
+                            @method ('PUT')
+                            <strong>Título: </strong><input type="text" name="title" id="title" placeholder="Título" value="{{ $movie->title }}">
+                            <strong>Categoria: </strong><input type="text" name="category" id="category" placeholder="Categoria" value="{{ $movie->category }}">
+                            <strong>Atores: </strong><input type="text" name="actors" id="actors" placeholder="Atores" value="{{ $movie->actors }}">
+                            <p>                            
+                            <strong>Descrição: </strong><p><textarea name="description" id="description" cols="100" rows="4" placeholder="Descrição">{{ $movie->description }}</textarea>
+                            
+                            <button type="submit" class="ml-6 text-lg leading-7 font-semibold">Enviar</button>
+                        </form>                               
+                    </div>                                  
                 </div>
-                <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
-                    <div class="flex justify-center mt-4 sm:items-center sm:justify-between">
-                        <div class="text-center text-sm text-gray-500 sm:text-left">
-                            <div class="flex items-center">
-                                <div class="flex items-center">                                   
-                                    <form action="{{ route('movies.create') }}" method="get"> 
-                                        <button type="submit" class="ml-6 text-lg leading-7 font-semibold">Cadastrar novo filme</buttom>
-                                    </form>  
-                                </div>
-                            </div>
-                        </div>            
-                    </div>
-                </div> 
-                @if (isset($filters))
-                    {{ $movies->appends($filters)->links() }}
-                @else
-                    {{ $movies->links() }}
-                @endif
             </div>
-        </div>
+        </div>                     
     </body>
 </html>

@@ -10,7 +10,7 @@ class MovieController extends Controller
 {
     public function index()
     {
-        $movies = Movie::get();
+        $movies = Movie::latest()->paginate();
 
         return view('movies.index', compact('movies'));
     }
@@ -24,28 +24,65 @@ class MovieController extends Controller
     {
         Movie::create($request->all());
 
-        return redirect()->route('movies.index');
+        return redirect()
+                ->route('movies.index')                
+                ->with('message', 'Filme criado com sucesso!');
     }
 
     public function show($id)
     {
-        $movie = Movie::finda($id);
+        if (!$movie = Movie::find($id)){
+            return redirect()->route('movies.index');
+        }
 
         return view('movies.show', compact('movie'));
     }
 
     public function edit($id)
     {
-        //
+        if (!$movie = Movie::find($id)){
+            return redirect()->back();
+        }
+
+        return view('movies.edit', compact('movie'));
     }
 
-    public function update(Request $request, $id)
+    public function update(StoreMovie $request, $id)
     {
-        //
+        if (!$movie = Movie::find($id)){
+            return redirect()->back();
+        }
+
+        $movie->update($request->all());
+
+        return redirect()
+                ->route('movies.index')
+                ->with('message', 'Filme atualizado com sucesso!');
     }
 
     public function destroy($id)
-    {
-        //
+    {        
+        if (!$movie = Movie::find($id)){
+            return redirect()->route('movies.index');
+        }
+
+        $movie->delete();
+        
+        return redirect()
+                ->route('movies.index')
+                ->with('message', 'Filme removido com sucesso!');
+    }
+
+    public function search(Request $request)
+    {     
+        $filters = $request->except('_token');
+        
+        $movies = Movie::where('title', 'LIKE',"%{$request->search}%")
+                            ->orWhere('description', 'LIKE', "%{$request->search}%")
+                            ->orWhere('category', 'LIKE', "%{$request->search}%")
+                            ->orWhere('actors', 'LIKE', "%{$request->search}%")
+                            ->paginate();
+
+        return view('movies.index', compact('movies', 'filters'));
     }
 }

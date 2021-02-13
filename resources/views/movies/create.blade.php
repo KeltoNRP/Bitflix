@@ -22,7 +22,12 @@
     </head>
     <body class="antialiased">  
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">
-            <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">                
+            <div class="max-w-6xl mx-auto sm:px-6 lg:px-8"> 
+                <div class="sm:text-right">
+                    <form action="{{ route('movies.index') }}" method="get"> 
+                        <button type="submit" class="ml-6 text-lg leading-7 font-semibold">X</buttom>
+                    </form>   
+                </div>                
                 <div class="mt-8 bg-white dark:bg-white-800 overflow-hidden shadow sm:rounded-lg">    
                     <div class="p-6">          
                         <H1>Cadastrar novo filme</H1>
@@ -35,12 +40,12 @@
                         @endif
                         <form action="{{ route('movies.store') }}" method="post">
                             @csrf
-                            <input type="text" name="title" id="title" placeholder="Título" value="{{ old('title') }}">
-                            <input type="text" name="category" id="category" placeholder="Categoria" value="{{ old('category') }}">
-                            <input type="text" name="actors" id="actors" placeholder="Atores" value="{{ old('actors') }}">
+                            <strong>Título: </strong><input type="text" name="title" id="title" placeholder="Título" value="{{ old('title') }}">
+                            <strong>Categoria: </strong><input type="text" name="category" id="category" placeholder="Categoria" value="{{ old('category') }}">
+                            <strong>Atores: </strong><input type="text" name="actors" id="actors" placeholder="Atores" value="{{ old('actors') }}">
                             <p>                            
-                            <textarea name="description" id="description" cols="100" rows="4" placeholder="Descrição">{{ old('description') }}</textarea>
-                            <button type="submit">Enviar</button>
+                            <strong>Descrição: </strong><p><textarea name="description" id="description" cols="100" rows="4" placeholder="Descrição">{{ old('description') }}</textarea>
+                            <button type="submit" class="ml-6 text-lg leading-7 font-semibold">Enviar</button>
                         </form>                               
                     </div>                                  
                 </div>

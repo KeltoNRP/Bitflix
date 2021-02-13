@@ -18,7 +18,7 @@ class MovieFactory extends Factory
             'description' => $this->faker->text,
             'category' => $this->faker->name,
             'actors' => $this->faker->name,
-            //'rating' => $this->faker->randomFloat(2, 0, 10),
+            'rating' => $this->faker->randomFloat(2, 0, 10),
         ];
     }
 }
