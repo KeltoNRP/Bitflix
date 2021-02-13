@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreMovie extends FormRequest
 {
@@ -13,11 +14,30 @@ class StoreMovie extends FormRequest
 
     public function rules()
     {
+        $id = $this->segment(2);
+
         return [
-            'title' => ['required', 'min:2', 'max:50'],
-            'description' => ['required', 'min:5', 'max:1000'], //teste dos 1000...
-            'category' => ['required', 'min:2', 'max:200'],
-            'actors' => ['required', 'min:2', 'max:200'],
+            'title' => [
+                'required', 
+                'min:2', 
+                'max:160', 
+                Rule::unique('movies')=>ignore($id)
+            ],
+            'description' => [
+                'required', 
+                'min:5', 
+                'max:1000'
+            ], 
+            'category' => [
+                'required', 
+                'min:2', 
+                'max:200'
+            ],
+            'actors' => [
+                'required', 
+                'min:2', 
+                'max:200'
+            ],
         ];
     }
 }

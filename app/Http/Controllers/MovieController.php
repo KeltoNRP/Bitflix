@@ -10,7 +10,7 @@ class MovieController extends Controller
 {
     public function index()
     {
-        $movies = Movie::latest()->paginate();
+        $movies = Movie::latest()->paginate(5);
 
         return view('movies.index', compact('movies'));
     }
@@ -81,7 +81,7 @@ class MovieController extends Controller
                             ->orWhere('description', 'LIKE', "%{$request->search}%")
                             ->orWhere('category', 'LIKE', "%{$request->search}%")
                             ->orWhere('actors', 'LIKE', "%{$request->search}%")
-                            ->paginate();
+                            ->paginate(5);
 
         return view('movies.index', compact('movies', 'filters'));
     }

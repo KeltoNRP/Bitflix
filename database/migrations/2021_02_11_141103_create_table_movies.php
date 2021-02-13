@@ -10,8 +10,8 @@ class CreateTableMovies extends Migration
     {
         Schema::create('movies', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->text('description');
+            $table->string('title', 160)->unique();
+            $table->text('description')->varchar(64);
             $table->string('category');
             $table->string('actors');
             $table->float('rating')->nullable();
