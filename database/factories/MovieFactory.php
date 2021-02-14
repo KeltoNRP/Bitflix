@@ -4,8 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Movie;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
-use Faker\Generator as Faker;
+use Illuminate\Support\Arr;
 
 class MovieFactory extends Factory
 {

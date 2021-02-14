@@ -10,7 +10,7 @@ class MovieSeeder extends Seeder
     public function run()
     {
         //factory(Movie::class, 10)->create();
-        Movie::factory (2)->create();
+        Movie::factory (10)->create();
         //factory(\App\Models\Movie::class, 10)->create();
     }
 }
